@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Face Tracking & Letter Visualization | Francisco Lopez-Martin</title>
+    <meta name="description" content="Machine learning-powered face tracking application that generates dynamic letter animations based on mouth movement using ML5.js and MediaPipe">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background: #000000;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Subtle cyberpunk grid effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, rgba(0, 255, 136, 0.02) 100%),
+                linear-gradient(0deg, transparent 98%, rgba(0, 204, 255, 0.02) 100%);
+            background-size: 100px 100px;
+            animation: subtleGrid 30s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes subtleGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+        
+        /* Center the p5.js canvas */
+        #canvas-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            width: 640px;
+            height: 480px;
+        }
+        
+        /* Glowing cyberpunk border for video */
+        #canvas-container canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 2px solid #00ccff;
+            border-radius: 10px;
+            box-shadow: 
+                0 0 20px rgba(0, 204, 255, 0.6),
+                0 0 40px rgba(0, 204, 255, 0.3),
+                inset 0 0 10px rgba(0, 204, 255, 0.1);
+            animation: videoPulse 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes videoPulse {
+            0% {
+                box-shadow: 
+                    0 0 20px rgba(0, 204, 255, 0.6),
+                    0 0 40px rgba(0, 204, 255, 0.3),
+                    inset 0 0 10px rgba(0, 204, 255, 0.1);
+            }
+            100% {
+                box-shadow: 
+                    0 0 30px rgba(0, 204, 255, 0.8),
+                    0 0 60px rgba(0, 204, 255, 0.5),
+                    inset 0 0 20px rgba(0, 204, 255, 0.2);
+            }
+        }
+        
+        .info-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 255, 136, 0.6);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            max-width: 280px;
+            z-index: 100;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+            backdrop-filter: blur(5px);
+            opacity: 0.9;
+        }
+        
+        .info-panel h1 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: #00ff88;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+        }
+        
+        .info-panel p {
+            margin: 8px 0;
+            line-height: 1.3;
+        }
+        
+        .tech-info {
+            font-size: 10px;
+            color: #00ccff;
+            margin-top: 8px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff0080;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            max-width: 300px;
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
+        }
+        
+        .controls h3 {
+            margin: 0 0 10px 0;
+            color: #ff0080;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 255, 136, 0.9);
+            color: black;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+            z-index: 100;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .back-link:hover {
+            background: rgba(0, 255, 136, 1);
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+        
+        .privacy-notice {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 204, 0, 0.9);
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            max-width: 250px;
+            z-index: 100;
+            font-weight: 500;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="info-panel">
+        <h1>Face Tracking Demo</h1>
+        <p><strong>How it works:</strong> Open your mouth to spawn letters that grow in size while your mouth stays open. Close your mouth to release them with physics!</p>
+        <p><strong>Technology:</strong> Real-time facial landmark detection using ML5.js FaceMesh powered by Google's MediaPipe.</p>
+        <div class="tech-info">
+            • 468-point facial mesh tracking<br>
+            • WebRTC camera access<br>
+            • Physics-based particle system<br>
+            • Real-time performance optimized
+        </div>
+    </div>
+    
+    <div class="controls">
+        <h3>Instructions</h3>
+        <p>🎯 <strong>Allow camera access</strong> when prompted<br>
+        👄 <strong>Open your mouth</strong> to spawn colorful letters<br>
+        💫 <strong>Keep mouth open</strong> to grow letters<br>
+        🎈 <strong>Close mouth</strong> to release letters with gravity<br>
+        📱 <strong>Works best</strong> with good lighting</p>
+    </div>
+    
+    <div class="privacy-notice">
+        🔒 <strong>Privacy:</strong> All processing happens locally in your browser. No video data is transmitted or stored.
+    </div>
+    
+    <a href="../" class="back-link">← Back to Portfolio</a>
+    
+    <main id="canvas-container">
+        <script src="sketch.js"></script>
+    </main>
+  </body>
+</html>
