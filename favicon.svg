@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <style>
+      .cyberpunk-text { 
+        font-family: 'Courier New', monospace; 
+        font-weight: bold; 
+        fill: #00ff88; 
+        text-shadow: 0 0 10px #00ff88;
+      }
+      .glow { 
+        filter: drop-shadow(0 0 4px #00ff88);
+      }
+      .bg { 
+        fill: #0a0a0a; 
+      }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect class="bg" width="32" height="32"/>
+  
+  <!-- Border glow -->
+  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#00ff88" stroke-width="1" class="glow"/>
+  
+  <!-- Main letters -->
+  <text x="16" y="22" text-anchor="middle" class="cyberpunk-text" font-size="14">FL</text>
+  
+  <!-- Accent dots -->
+  <circle cx="8" cy="8" r="2" fill="#ff0080" class="glow"/>
+  <circle cx="24" cy="8" r="2" fill="#00ccff" class="glow"/>
+</svg>

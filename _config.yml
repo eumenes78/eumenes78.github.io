@@ -1,0 +1,187 @@
+# Jekyll Configuration for Francisco Lopez-Martin Portfolio
+# GitHub Pages deployment configuration
+
+# Site settings
+title: "Francisco Lopez-Martin | Digital Humanities Scholar"
+description: "Professor of Spanish at Denison University. Digital humanities scholar specializing in computational literary analysis and Spanish cultural studies."
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://eumenes78.github.io" # the base hostname & protocol for your site
+
+# Author information
+author:
+  name: "Francisco Lopez-Martin"
+  email: "lopezf@denison.edu"
+  title: "Professor of Spanish"
+  institution: "Denison University"
+  bio: "Digital humanities scholar specializing in computational literary analysis and Spanish cultural studies."
+
+# SEO settings
+google_analytics: # Add your Google Analytics ID if you have one
+twitter:
+  username: # Add your Twitter username if you have one
+facebook:
+  app_id: # Add your Facebook App ID if you have one
+  publisher: # Add your Facebook Page ID if you have one
+
+# Social media links
+social:
+  twitter: # Add your Twitter URL
+  linkedin: # Add your LinkedIn URL
+  github: "https://github.com/eumenes78"
+  orcid: # Add your ORCID URL
+  researchgate: # Add your ResearchGate URL
+  academia: # Add your Academia.edu URL
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+timezone: America/New_York
+
+# Jekyll plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - LICENSE
+
+# Include files
+include:
+  - _pages
+
+# Collections (if you want to use Jekyll collections for projects, publications, etc.)
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name/
+  publications:
+    output: true
+    permalink: /:collection/:name/
+  courses:
+    output: true
+    permalink: /:collection/:name/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+      type: "publications"
+    values:
+      layout: "publication"
+  - scope:
+      path: ""
+      type: "courses"
+    values:
+      layout: "course"
+
+# Site configuration
+lang: en_US
+repository: eumenes78/eumenes78.github.io
+
+# Theme (using default GitHub Pages theme)
+theme: minima
+
+# Custom variables
+cyberpunk_theme: true
+enable_animations: true
+show_neural_network: true
+
+# Navigation menu
+navigation:
+  - title: "Home"
+    url: "#home"
+    icon: "fas fa-home"
+  - title: "Digital Projects"
+    url: "#projects"
+    icon: "fas fa-laptop-code"
+  - title: "CV"
+    url: "#cv"
+    icon: "fas fa-user-graduate"
+  - title: "Publications"
+    url: "#publications"
+    icon: "fas fa-book"
+  - title: "Courses"
+    url: "#courses"
+    icon: "fas fa-chalkboard-teacher"
+
+# Footer links
+footer_links:
+  - title: "Email"
+    url: "mailto:lopezf@denison.edu"
+    icon: "fas fa-envelope"
+  - title: "GitHub"
+    url: "https://github.com/eumenes78"
+    icon: "fab fa-github"
+  - title: "LinkedIn"
+    url: "#"
+    icon: "fab fa-linkedin"
+  - title: "ORCID"
+    url: "#"
+    icon: "fab fa-orcid"
+
+# Research areas
+research_areas:
+  - "Digital Humanities"
+  - "Computational Literary Analysis"
+  - "Spanish Golden Age Literature"
+  - "Natural Language Processing"
+  - "Cultural Analytics"
+  - "Digital Archives"
+
+# Programming skills
+programming_skills:
+  - name: "Python"
+    level: 90
+  - name: "R"
+    level: 85
+  - name: "JavaScript"
+    level: 75
+  - name: "HTML/CSS"
+    level: 88
+  - name: "SQL"
+    level: 70
+  - name: "LaTeX"
+    level: 95
+
+# Academic positions
+positions:
+  - title: "Professor of Spanish"
+    institution: "Denison University"
+    start_year: 2018
+    end_year: "Present"
+  - title: "Associate Professor of Spanish"
+    institution: "Denison University"
+    start_year: 2012
+    end_year: 2018
+  - title: "Assistant Professor of Spanish"
+    institution: "Denison University"
+    start_year: 2006
+    end_year: 2012
+
+# Education
+education:
+  - degree: "Ph.D. in Spanish Literature"
+    institution: "University of Chicago"
+    year: 2006
+  - degree: "M.A. in Spanish Literature"
+    institution: "University of Chicago"
+    year: 2002
+  - degree: "B.A. in Spanish and Computer Science"
+    institution: "Williams College"
+    year: 2000

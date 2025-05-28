@@ -1,0 +1,49 @@
+{
+  "name": "francisco-lopez-martin-portfolio",
+  "version": "1.0.0",
+  "description": "Cyberpunk-themed portfolio website for Francisco Lopez-Martin, Professor of Spanish at Denison University",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "./test.sh",
+    "deploy": "./deploy.sh",
+    "build": "echo 'No build step required for static site'",
+    "lint:css": "echo 'CSS linting not configured'",
+    "lint:js": "echo 'JS linting not configured'",
+    "format": "echo 'Code formatting not configured'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eumenes78/eumenes78.github.io.git"
+  },
+  "keywords": [
+    "portfolio",
+    "digital-humanities",
+    "academic",
+    "spanish-literature",
+    "cyberpunk",
+    "responsive-design",
+    "jekyll",
+    "github-pages"
+  ],
+  "author": {
+    "name": "Francisco Lopez-Martin",
+    "email": "lopezf@denison.edu",
+    "url": "https://eumenes78.github.io"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eumenes78/eumenes78.github.io/issues"
+  },
+  "homepage": "https://eumenes78.github.io",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
