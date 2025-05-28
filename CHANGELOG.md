@@ -5,6 +5,27 @@ All notable changes to Francisco Lopez-Martin's Portfolio Website will be docume
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-05-28
+
+### Added
+- Cyberpunk-themed music player with full functionality:
+  - Play/pause controls for cyberpunk.mp3 background music
+  - Volume control with mute/unmute functionality
+  - Collapsible player interface with toggle button
+  - Animated equalizer visualization during playback
+  - Keyboard shortcuts (Space for play/pause, M for mute)
+  - Volume preference persistence using localStorage
+  - Looping audio with error handling
+  - Browser autoplay policy compliance
+- Enhanced user experience with atmospheric background music
+- Comprehensive music player testing suite
+
+### Technical Improvements
+- Audio element integration with proper error handling
+- CSS-based equalizer animations with play/pause states
+- Responsive music player design for all screen sizes
+- Accessibility features with proper ARIA labels and keyboard navigation
+
 ## [1.0.0] - 2025-05-28
 
 ### Added

@@ -21,8 +21,18 @@ A responsive, cyberpunk-themed portfolio website for Francisco Lopez-Martin, Pro
 - **Single Page Application**: Smooth section transitions without page reloads
 - **Mobile-First Design**: Collapsible navigation and touch-friendly interactions
 - **Publication Filtering**: Dynamic filtering system for academic publications
+- **Cyberpunk Music Player**: Interactive audio player with volume controls and equalizer visualization
 - **Dark Theme**: Cyberpunk-inspired dark color scheme
 - **SEO Optimized**: Meta tags, structured data, and semantic HTML
+
+### 🎵 Music Player Features
+- **Play/Pause Controls**: Toggle background music with cyberpunk atmosphere
+- **Volume Control**: Adjustable volume with mute/unmute functionality
+- **Collapsible Interface**: Minimizable player that doesn't interfere with content
+- **Equalizer Visualization**: Animated bars that respond to play/pause state
+- **Keyboard Shortcuts**: Space bar for play/pause, M key for mute/unmute
+- **Persistent Settings**: Volume preferences saved across sessions
+- **Responsive Design**: Optimized for all screen sizes and devices
 
 ### 🎓 Academic Content
 - **Digital Projects**: Showcase of computational literary analysis projects

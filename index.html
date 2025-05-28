@@ -70,6 +70,44 @@
         </div>
     </nav>
 
+    <!-- Cyberpunk Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <audio id="cyberpunkAudio" loop preload="auto">
+            <source src="cyberpunk.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <div class="player-controls">
+            <button class="player-btn play-pause-btn" id="playPauseBtn" title="Play/Pause">
+                <i class="fas fa-play" id="playPauseIcon"></i>
+            </button>
+            
+            <div class="volume-container">
+                <button class="player-btn volume-btn" id="volumeBtn" title="Mute/Unmute">
+                    <i class="fas fa-volume-up" id="volumeIcon"></i>
+                </button>
+                <div class="volume-slider-container">
+                    <input type="range" class="volume-slider" id="volumeSlider" 
+                           min="0" max="100" value="50" title="Volume">
+                </div>
+            </div>
+            
+            <div class="music-info">
+                <span class="music-title">Cyberpunk Atmosphere</span>
+                <div class="music-equalizer" id="equalizer">
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="player-toggle" id="playerToggle" title="Toggle Player">
+            <i class="fas fa-music"></i>
+        </button>
+    </div>
+
     <!-- Main Content -->
     <main class="main-content">
         <!-- Home Section -->
@@ -198,6 +236,33 @@
                             <a href="#" class="project-link">
                                 <i class="fas fa-chart-line"></i>
                                 Analysis
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Animated Pelican Visualization</h3>
+                            <span class="project-status">Completed</span>
+                        </div>
+                        <p class="project-description">
+                            Creative coding project featuring an animated pelican riding a bicycle across a dynamic landscape. 
+                            Demonstrates procedural animation, particle systems, and interactive visual storytelling using p5.js.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">p5.js</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Creative Coding</span>
+                            <span class="tech-tag">Animation</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="ml5/" class="project-link">
+                                <i class="fas fa-play"></i>
+                                Live Demo
+                            </a>
+                            <a href="ml5/mySketch.js" class="project-link">
+                                <i class="fas fa-code"></i>
+                                Source Code
                             </a>
                         </div>
                     </div>

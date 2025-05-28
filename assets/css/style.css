@@ -173,6 +173,215 @@ h1, h2, h3, h4, h5, h6 {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Cyberpunk Music Player */
+.music-player {
+    position: fixed;
+    top: 50%;
+    right: -280px;
+    transform: translateY(-50%);
+    width: 320px;
+    background: var(--bg-card);
+    border: 1px solid var(--primary-color);
+    border-radius: 12px 0 0 12px;
+    padding: 1rem;
+    z-index: 999;
+    transition: right 0.4s ease;
+    box-shadow: var(--shadow-glow);
+    backdrop-filter: blur(10px);
+}
+
+.music-player.expanded {
+    right: 0;
+}
+
+.player-toggle {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 60px;
+    background: var(--bg-card);
+    border: 1px solid var(--primary-color);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-glow);
+}
+
+.player-toggle:hover {
+    background: rgba(0, 255, 136, 0.1);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.player-toggle i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.player-btn {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    font-size: 1rem;
+}
+
+.player-btn:hover {
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.1);
+}
+
+.play-pause-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volume-slider-container {
+    position: relative;
+    width: 80px;
+}
+
+.volume-slider {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-color);
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: var(--shadow-glow);
+    transition: var(--transition-fast);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--shadow-glow);
+}
+
+.music-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.music-title {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    font-family: var(--font-heading);
+}
+
+.music-equalizer {
+    display: flex;
+    align-items: end;
+    gap: 3px;
+    height: 20px;
+}
+
+.eq-bar {
+    width: 3px;
+    background: var(--primary-color);
+    border-radius: 2px;
+    transition: height 0.1s ease;
+    box-shadow: 0 0 4px var(--primary-color);
+}
+
+.eq-bar:nth-child(1) {
+    height: 8px;
+    animation: eq1 1.2s infinite ease-in-out;
+}
+
+.eq-bar:nth-child(2) {
+    height: 12px;
+    animation: eq2 0.9s infinite ease-in-out;
+}
+
+.eq-bar:nth-child(3) {
+    height: 16px;
+    animation: eq3 1.1s infinite ease-in-out;
+}
+
+.eq-bar:nth-child(4) {
+    height: 10px;
+    animation: eq4 1.3s infinite ease-in-out;
+}
+
+@keyframes eq1 {
+    0%, 100% { height: 8px; }
+    50% { height: 16px; }
+}
+
+@keyframes eq2 {
+    0%, 100% { height: 12px; }
+    50% { height: 6px; }
+}
+
+@keyframes eq3 {
+    0%, 100% { height: 16px; }
+    50% { height: 10px; }
+}
+
+@keyframes eq4 {
+    0%, 100% { height: 10px; }
+    50% { height: 18px; }
+}
+
+.music-equalizer.paused .eq-bar {
+    animation: none;
+    height: 4px;
+    opacity: 0.5;
+}
+
 /* Main Content */
 .main-content {
     margin-top: 80px;

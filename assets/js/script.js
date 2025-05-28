@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollEffects();
     initAnimations();
     initContactForm();
+    initMusicPlayer(); // Add music player initialization
 });
 
 // Navigation functionality
@@ -413,12 +414,188 @@ document.addEventListener('DOMContentLoaded', function() {
     initThemeToggle();
 });
 
+// Music player functionality
+function initMusicPlayer() {
+    const audio = document.getElementById('cyberpunkAudio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playPauseIcon = document.getElementById('playPauseIcon');
+    const volumeBtn = document.getElementById('volumeBtn');
+    const volumeIcon = document.getElementById('volumeIcon');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const playerToggle = document.getElementById('playerToggle');
+    const musicPlayer = document.getElementById('musicPlayer');
+    const equalizer = document.getElementById('equalizer');
+    
+    if (!audio || !playPauseBtn || !volumeSlider || !playerToggle) return;
+    
+    let isPlaying = false;
+    let isMuted = false;
+    let previousVolume = 0.5;
+    
+    // Initialize audio settings
+    audio.volume = 0.5;
+    audio.loop = true;
+    
+    // Play/Pause functionality
+    playPauseBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            pauseMusic();
+        } else {
+            playMusic();
+        }
+    });
+    
+    // Volume control
+    volumeSlider.addEventListener('input', function() {
+        const volume = this.value / 100;
+        audio.volume = volume;
+        previousVolume = volume;
+        
+        updateVolumeIcon(volume);
+        
+        if (volume > 0 && isMuted) {
+            isMuted = false;
+        }
+    });
+    
+    // Mute/Unmute functionality
+    volumeBtn.addEventListener('click', function() {
+        if (isMuted) {
+            audio.volume = previousVolume;
+            volumeSlider.value = previousVolume * 100;
+            isMuted = false;
+        } else {
+            previousVolume = audio.volume;
+            audio.volume = 0;
+            volumeSlider.value = 0;
+            isMuted = true;
+        }
+        updateVolumeIcon(audio.volume);
+    });
+    
+    // Player toggle functionality
+    playerToggle.addEventListener('click', function() {
+        musicPlayer.classList.toggle('expanded');
+    });
+    
+    // Audio event listeners
+    audio.addEventListener('loadstart', function() {
+        console.log('Audio loading started');
+    });
+    
+    audio.addEventListener('canplay', function() {
+        console.log('Audio can start playing');
+    });
+    
+    audio.addEventListener('error', function(e) {
+        console.error('Audio error:', e);
+        showNotification('Error loading audio file', 'error');
+    });
+    
+    audio.addEventListener('ended', function() {
+        // Since loop is enabled, this shouldn't fire, but just in case
+        if (!audio.loop) {
+            pauseMusic();
+        }
+    });
+    
+    // Functions
+    function playMusic() {
+        audio.play().then(() => {
+            isPlaying = true;
+            playPauseIcon.className = 'fas fa-pause';
+            playPauseBtn.title = 'Pause';
+            startEqualizer();
+        }).catch(error => {
+            console.error('Error playing audio:', error);
+            showNotification('Error playing audio. Please check your browser settings.', 'error');
+        });
+    }
+    
+    function pauseMusic() {
+        audio.pause();
+        isPlaying = false;
+        playPauseIcon.className = 'fas fa-play';
+        playPauseBtn.title = 'Play';
+        stopEqualizer();
+    }
+    
+    function updateVolumeIcon(volume) {
+        if (volume === 0) {
+            volumeIcon.className = 'fas fa-volume-mute';
+        } else if (volume < 0.5) {
+            volumeIcon.className = 'fas fa-volume-down';
+        } else {
+            volumeIcon.className = 'fas fa-volume-up';
+        }
+    }
+    
+    function startEqualizer() {
+        if (!equalizer) return;
+        
+        // Remove paused class to enable animations
+        equalizer.classList.remove('paused');
+    }
+    
+    function stopEqualizer() {
+        if (!equalizer) return;
+        
+        // Add paused class to disable animations
+        equalizer.classList.add('paused');
+    }
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Space bar to play/pause (only when not typing in inputs)
+        if (e.code === 'Space' && !e.target.matches('input, textarea')) {
+            e.preventDefault();
+            if (isPlaying) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        }
+        
+        // M key to mute/unmute
+        if (e.code === 'KeyM' && !e.target.matches('input, textarea')) {
+            e.preventDefault();
+            volumeBtn.click();
+        }
+    });
+    
+    // Save volume preference
+    volumeSlider.addEventListener('change', function() {
+        localStorage.setItem('musicVolume', this.value);
+    });
+    
+    // Load saved volume preference
+    const savedVolume = localStorage.getItem('musicVolume');
+    if (savedVolume !== null) {
+        volumeSlider.value = savedVolume;
+        audio.volume = savedVolume / 100;
+        previousVolume = audio.volume;
+        updateVolumeIcon(audio.volume);
+    }
+    
+    // Auto-play prevention handling
+    document.addEventListener('click', function autoPlay() {
+        // Remove this listener after first user interaction
+        document.removeEventListener('click', autoPlay);
+        
+        // Enable audio context if needed (for better browser compatibility)
+        if (audio.readyState >= 2) {
+            console.log('Audio ready for playback');
+        }
+    }, { once: true });
+}
+
 // Export functions for testing
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         initNavigation,
         initMobileMenu,
         initPublicationFilters,
+        initMusicPlayer,
         showNotification,
         debounce
     };
