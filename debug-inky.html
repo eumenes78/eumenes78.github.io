@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Debug Inky Story</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="inky-story/style.css">
+    
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: monospace;
+        }
+        
+        #debug {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        
+        .choice {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #0f0;
+            margin: 5px 0;
+            padding: 10px;
+        }
+        
+        .choice a {
+            background: rgba(255, 255, 0, 0.3);
+            padding: 5px;
+            border: 1px solid yellow;
+            display: block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="debug">
+        Debug Info:<br>
+        <span id="debug-info">Loading...</span>
+    </div>
+
+    <div class="outerContainer">
+        <div id="story" class="container">
+            <div class="header">
+                <h1>El Fin de Alsnia</h1>
+                <h2 class="byline"></h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Debug logging
+        function debugLog(message) {
+            console.log('DEBUG:', message);
+            document.getElementById('debug-info').innerHTML += '<br>' + message;
+        }
+        
+        // Override console.error to capture errors
+        window.onerror = function(msg, url, line, col, error) {
+            debugLog('ERROR: ' + msg + ' at ' + line + ':' + col);
+            return false;
+        };
+        
+        debugLog('Starting to load scripts...');
+    </script>
+    
+    <script src="inky-story/ink.js"></script>
+    <script>
+        debugLog('ink.js loaded');
+    </script>
+    
+    <script src="inky-story/SPAN377.js"></script>
+    <script>
+        debugLog('SPAN377.js loaded');
+    </script>
+    
+    <script src="inky-story/main.js"></script>
+    <script>
+        debugLog('main.js loaded');
+        
+        // Add click event listener to document to see what's being clicked
+        document.addEventListener('click', function(e) {
+            debugLog('Click detected on: ' + e.target.tagName + ' with class: ' + e.target.className);
+            if (e.target.tagName === 'A') {
+                debugLog('Link clicked: ' + e.target.textContent);
+            }
+        });
+        
+        // Check if choices are created
+        setTimeout(function() {
+            var choices = document.querySelectorAll('.choice');
+            debugLog('Found ' + choices.length + ' choices');
+            choices.forEach(function(choice, index) {
+                debugLog('Choice ' + index + ': ' + choice.textContent);
+            });
+        }, 2000);
+    </script>
+</body>
+</html>

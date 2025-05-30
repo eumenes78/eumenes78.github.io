@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>El Fin de Alsnia | Interactive Fiction | Francisco Lopez-Martin</title>
+    <meta name="description" content="Interactive fiction story about survival during wartime, created with Ink framework">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Override any problematic styles */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Portfolio navigation styling */
+        .portfolio-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid #00ff88;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-nav:hover {
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .portfolio-nav a {
+            color: #00ff88;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .portfolio-nav a:hover {
+            color: white;
+        }
+        
+        /* Enhanced project info */
+        .project-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ccff;
+            max-width: 300px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+        }
+        
+        .project-info h3 {
+            color: #00ccff;
+            margin: 0 0 10px 0;
+            font-family: 'Orbitron', monospace;
+            font-size: 16px;
+        }
+        
+        .tech-tags {
+            margin-top: 10px;
+        }
+        
+        .tech-tags span {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin: 2px;
+            border: 1px solid rgba(0, 255, 136, 0.5);
+        }
+        
+        /* Make story choices clearly clickable */
+        .choice {
+            margin: 20px 0 !important;
+            text-align: center !important;
+            position: relative !important;
+            z-index: 100 !important;
+        }
+        
+        .choice a {
+            display: inline-block !important;
+            padding: 12px 24px !important;
+            background: linear-gradient(45deg, rgba(0, 255, 136, 0.2), rgba(0, 204, 255, 0.2)) !important;
+            border: 2px solid #00ff88 !important;
+            border-radius: 8px !important;
+            color: #00ff88 !important;
+            text-decoration: none !important;
+            font-family: 'Rajdhani', sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            transition: all 0.3s ease !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 101 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+        }
+        
+        .choice a:hover {
+            background: linear-gradient(45deg, rgba(0, 255, 136, 0.4), rgba(0, 204, 255, 0.4)) !important;
+            border-color: #00ccff !important;
+            color: white !important;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .choice a:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3) !important;
+        }
+        
+        /* Dark cyberpunk theme for the story */
+        body {
+            background: #000 !important;
+            color: #00ff88 !important;
+        }
+        
+        .container {
+            background: rgba(0, 0, 0, 0.8) !important;
+            border: 1px solid rgba(0, 255, 136, 0.3) !important;
+            border-radius: 10px !important;
+        }
+        
+        p {
+            color: #ccc !important;
+            line-height: 1.8em !important;
+        }
+        
+        h1 {
+            color: #00ccff !important;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.5) !important;
+        }
+        
+        .header {
+            border-bottom: 2px solid rgba(0, 255, 136, 0.3) !important;
+            margin-bottom: 30px !important;
+        }
+        
+        /* Ensure images are properly displayed */
+        img {
+            border-radius: 8px !important;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3) !important;
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="portfolio-nav">
+        <a href="../">← Back to Portfolio</a>
+    </div>
+
+    <div class="project-info">
+        <h3>Project Details</h3>
+        <p><strong>El Fin de Alsnia</strong> - An immersive interactive fiction experience about survival, family, and difficult choices during wartime.</p>
+        <div class="tech-tags">
+            <span>Ink Framework</span>
+            <span>JavaScript</span>
+            <span>Interactive Fiction</span>
+            <span>Narrative Design</span>
+            <span>Spanish Language</span>
+        </div>
+    </div>
+
+    <div class="outerContainer">
+        <div id="story" class="container">
+            <div class="header">
+                <h1>El Fin de Alsnia</h1>
+                <h2 class="byline"></h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="ink.js"></script>
+    <script src="SPAN377.js"></script>
+    <script src="main.js"></script>
+    
+    <script>
+        // Enhance click handling after story loads
+        setTimeout(function() {
+            function enhanceChoices() {
+                const choices = document.querySelectorAll('.choice a');
+                choices.forEach(function(choice) {
+                    // Ensure click events work
+                    choice.style.pointerEvents = 'auto';
+                    choice.style.cursor = 'pointer';
+                    
+                    // Add visual feedback
+                    choice.addEventListener('mousedown', function() {
+                        this.style.transform = 'translateY(2px)';
+                    });
+                    
+                    choice.addEventListener('mouseup', function() {
+                        this.style.transform = 'translateY(-2px)';
+                    });
+                });
+            }
+            
+            // Enhance choices initially
+            enhanceChoices();
+            
+            // Re-enhance choices whenever new ones are added (since story continues)
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        enhanceChoices();
+                    }
+                });
+            });
+            
+            observer.observe(document.getElementById('story'), {
+                childList: true,
+                subtree: true
+            });
+            
+        }, 1000);
+    </script>
+</body>
+</html>

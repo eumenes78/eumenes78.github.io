@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Inky Story Test</title>
+    <link rel="stylesheet" href="inky-story/style.css">
+    <style>
+        .choice {
+            background: yellow !important;
+            padding: 10px !important;
+            margin: 10px 0 !important;
+            border: 2px solid red !important;
+        }
+        
+        .choice a {
+            background: green !important;
+            color: white !important;
+            padding: 10px !important;
+            display: block !important;
+            font-size: 18px !important;
+            cursor: pointer !important;
+        }
+        
+        .choice a:hover {
+            background: blue !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outerContainer">
+        <div id="story" class="container">
+            <div class="header">
+                <h1>El Fin de Alsnia</h1>
+                <h2 class="byline"></h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check script loading
+        console.log('Loading ink.js...');
+    </script>
+    
+    <script src="inky-story/ink.js"></script>
+    
+    <script>
+        console.log('ink.js loaded, typeof inkjs:', typeof inkjs);
+        console.log('Loading story content...');
+    </script>
+    
+    <script src="inky-story/SPAN377.js"></script>
+    
+    <script>
+        console.log('SPAN377.js loaded, typeof storyContent:', typeof storyContent);
+        console.log('Loading main.js...');
+    </script>
+    
+    <script src="inky-story/main.js"></script>
+    
+    <script>
+        console.log('All scripts loaded');
+        
+        // Wait for story to initialize and check choices
+        setTimeout(function() {
+            var choices = document.querySelectorAll('.choice');
+            console.log('Found choices:', choices.length);
+            
+            if (choices.length > 0) {
+                console.log('Story loaded successfully!');
+                choices.forEach(function(choice, i) {
+                    console.log('Choice ' + i + ':', choice.textContent.trim());
+                    var link = choice.querySelector('a');
+                    if (link) {
+                        // Test click simulation
+                        link.addEventListener('click', function(e) {
+                            console.log('Choice clicked:', this.textContent);
+                        });
+                    }
+                });
+            } else {
+                console.log('No choices found - story may not have loaded properly');
+            }
+        }, 3000);
+        
+        // Global click listener
+        document.addEventListener('click', function(e) {
+            console.log('Click detected on:', e.target.tagName, e.target.className);
+        });
+    </script>
+</body>
+</html>

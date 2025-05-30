@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>El Fin de Alsnia | Interactive Fiction | Francisco Lopez-Martin</title>
+    <meta name="description" content="Interactive fiction story about survival during wartime, created with Ink framework">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Portfolio navigation styling */
+        .portfolio-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid #00ff88;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-nav:hover {
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .portfolio-nav a {
+            color: #00ff88;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .portfolio-nav a:hover {
+            color: white;
+        }
+        
+        /* Enhanced project info */
+        .project-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ccff;
+            max-width: 300px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+        }
+        
+        .project-info h3 {
+            color: #00ccff;
+            margin: 0 0 10px 0;
+            font-family: 'Orbitron', monospace;
+            font-size: 16px;
+        }
+        
+        .tech-tags {
+            margin-top: 10px;
+        }
+        
+        .tech-tags span {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin: 2px;
+            border: 1px solid rgba(0, 255, 136, 0.5);
+        }
+        
+        /* Cyberpunk styling for choices */
+        .choice a {
+            background: rgba(0, 255, 136, 0.1) !important;
+            border: 1px solid rgba(0, 255, 136, 0.3) !important;
+            color: #00ff88 !important;
+            padding: 8px 16px !important;
+            margin: 4px !important;
+            border-radius: 4px !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .choice a:hover {
+            background: rgba(0, 255, 136, 0.2) !important;
+            border-color: #00ff88 !important;
+            color: white !important;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="portfolio-nav">
+        <a href="../">← Back to Portfolio</a>
+    </div>
+
+    <div class="project-info">
+        <h3>Project Details</h3>
+        <p><strong>El Fin de Alsnia</strong> - An immersive interactive fiction experience about survival, family, and difficult choices during wartime.</p>
+        <div class="tech-tags">
+            <span>Ink Framework</span>
+            <span>JavaScript</span>
+            <span>Interactive Fiction</span>
+            <span>Narrative Design</span>
+            <span>Spanish Language</span>
+        </div>
+    </div>
+
+    <div class="outerContainer">
+        <h3 class="written-in-ink"><a href="https://www.inklestudios.com/ink">WRITTEN IN INK</a></h3>
+
+        <div id="controls" class="buttons">
+          <a id="rewind" title="Restart story from beginning">restart</a>
+          <a id="save" title="Save progress">save</a>
+          <a id="reload" title="Reload from save point">load</a>
+          <a id="theme-switch" title="Switch theme">theme</a>
+        </div>
+
+        <div id="story" class="container">
+            <div class="header">
+                <h1>El Fin de Alsnia</h1>
+                <h2 class="byline"></h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="ink.js"></script>
+    <script src="SPAN377.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inky Test</title>
+</head>
+<body>
+    <div id="story">
+        <h1>Loading...</h1>
+    </div>
+    
+    <script src="inky-story/ink.js"></script>
+    <script src="inky-story/SPAN377.js"></script>
+    <script>
+        console.log("storyContent:", typeof storyContent);
+        if (typeof storyContent !== 'undefined') {
+            console.log("Story content loaded successfully");
+            // Test basic story creation
+            try {
+                var story = new inkjs.Story(storyContent);
+                console.log("Story created successfully");
+                
+                // Test if we can get content
+                if (story.canContinue) {
+                    var content = story.Continue();
+                    console.log("First content:", content);
+                    document.getElementById('story').innerHTML = content;
+                }
+            } catch (e) {
+                console.error("Error creating story:", e);
+                document.getElementById('story').innerHTML = "Error: " + e.message;
+            }
+        } else {
+            console.error("storyContent is not defined");
+            document.getElementById('story').innerHTML = "Error: storyContent not loaded";
+        }
+    </script>
+</body>
+</html>

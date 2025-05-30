@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Minimal Inky Test</title>
+    <link rel="stylesheet" href="inky-story/style.css">
+    <style>
+        /* Ensure all interactive elements have proper pointer events */
+        * {
+            pointer-events: auto;
+        }
+        
+        /* Make choices clearly visible */
+        .choice {
+            background: yellow !important;
+            border: 2px solid red !important;
+            padding: 10px !important;
+            margin: 10px 0 !important;
+        }
+        
+        .choice a {
+            background: green !important;
+            color: white !important;
+            padding: 10px !important;
+            display: block !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+            text-decoration: none !important;
+            cursor: pointer !important;
+        }
+        
+        .choice a:hover {
+            background: blue !important;
+        }
+        
+        /* Remove any potential z-index conflicts */
+        #story {
+            z-index: 1000 !important;
+            position: relative !important;
+        }
+        
+        #story * {
+            z-index: 1001 !important;
+            position: relative !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outerContainer">
+        <div id="story" class="container">
+            <div class="header">
+                <h1>El Fin de Alsnia</h1>
+                <h2 class="byline"></h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="inky-story/ink.js"></script>
+    <script src="inky-story/SPAN377.js"></script>
+    <script>
+        // Check if storyContent is defined
+        console.log('storyContent defined:', typeof storyContent !== 'undefined');
+        console.log('storyContent:', storyContent);
+        
+        // Check if inkjs is defined
+        console.log('inkjs defined:', typeof inkjs !== 'undefined');
+        console.log('inkjs:', inkjs);
+    </script>
+    <script src="inky-story/main.js"></script>
+    
+    <script>
+        // Add debugging for clicks
+        document.addEventListener('click', function(e) {
+            console.log('CLICK:', e.target, e.target.tagName, e.target.className);
+            if (e.target.tagName === 'A') {
+                console.log('Link clicked with text:', e.target.textContent);
+            }
+        });
+        
+        // Check if choices exist after page loads
+        setTimeout(function() {
+            var choices = document.querySelectorAll('.choice');
+            console.log('Found choices:', choices.length);
+            choices.forEach(function(choice, i) {
+                console.log('Choice', i, ':', choice.textContent);
+                var link = choice.querySelector('a');
+                if (link) {
+                    console.log('Link element:', link);
+                    console.log('Link onclick:', link.onclick);
+                    console.log('Link listeners:', getEventListeners ? getEventListeners(link) : 'Cannot check listeners');
+                }
+            });
+        }, 3000);
+    </script>
+</body>
+</html>

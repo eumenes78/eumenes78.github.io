@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Inky Story Diagnostic</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+        }
+        
+        .log {
+            border: 1px solid #0f0;
+            padding: 10px;
+            margin: 10px 0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+        
+        .error {
+            color: #f00;
+            border-color: #f00;
+            background: rgba(255, 0, 0, 0.1);
+        }
+        
+        .choice-test {
+            background: yellow;
+            color: black;
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inky Story Diagnostic</h1>
+    
+    <div class="log" id="log">
+        Starting diagnostic...<br>
+    </div>
+    
+    <div class="choice-test" onclick="alert('Test click works!')">
+        Test Clickable Element - Click Me!
+    </div>
+    
+    <div id="story-container"></div>
+    
+    <script>
+        function log(message, isError = false) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = isError ? 'error' : '';
+            logDiv.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            console.log(message);
+        }
+        
+        // Check if scripts are loading
+        log('Checking script dependencies...');
+        
+        setTimeout(() => {
+            log('Checking if inkjs is available: ' + (typeof inkjs !== 'undefined'));
+            log('Checking if storyContent is available: ' + (typeof storyContent !== 'undefined'));
+            
+            if (typeof inkjs === 'undefined') {
+                log('ERROR: ink.js not loaded!', true);
+            }
+            
+            if (typeof storyContent === 'undefined') {
+                log('ERROR: storyContent (SPAN377.js) not loaded!', true);
+            }
+            
+            if (typeof inkjs !== 'undefined' && typeof storyContent !== 'undefined') {
+                log('Both dependencies loaded successfully');
+                
+                try {
+                    log('Attempting to create Ink story...');
+                    const story = new inkjs.Story(storyContent);
+                    log('Story created successfully');
+                    
+                    log('Story can continue: ' + story.canContinue);
+                    log('Current choices: ' + story.currentChoices.length);
+                    
+                    if (story.canContinue) {
+                        const text = story.Continue();
+                        log('First paragraph: ' + text.substring(0, 100) + '...');
+                        log('Choices after continue: ' + story.currentChoices.length);
+                        
+                        story.currentChoices.forEach((choice, i) => {
+                            log(`Choice ${i}: ${choice.text}`);
+                        });
+                    }
+                    
+                } catch (error) {
+                    log('ERROR creating story: ' + error.message, true);
+                    console.error(error);
+                }
+            }
+        }, 1000);
+        
+        // Override console.error to catch any errors
+        const originalError = console.error;
+        console.error = function(...args) {
+            log('CONSOLE ERROR: ' + args.join(' '), true);
+            originalError.apply(console, args);
+        };
+        
+        // Catch any unhandled errors
+        window.onerror = function(message, source, lineno, colno, error) {
+            log(`SCRIPT ERROR: ${message} at ${source}:${lineno}:${colno}`, true);
+            return false;
+        };
+    </script>
+    
+    <script src="inky-story/ink.js"></script>
+    <script src="inky-story/SPAN377.js"></script>
+    
+    <script>
+        log('Scripts loaded, running final check...');
+        setTimeout(() => {
+            log('Final check - inkjs: ' + (typeof inkjs !== 'undefined'));
+            log('Final check - storyContent: ' + (typeof storyContent !== 'undefined'));
+        }, 500);
+    </script>
+</body>
+</html>
