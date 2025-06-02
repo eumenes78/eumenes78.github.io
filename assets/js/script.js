@@ -15,19 +15,29 @@ document.addEventListener('DOMContentLoaded', function() {
 // Navigation functionality
 function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
+    const navigationButtons = document.querySelectorAll('[data-section]'); // Handle all elements with data-section
     const sections = document.querySelectorAll('main > section');
     
-    // Handle navigation clicks
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    // Handle navigation clicks for nav links and buttons
+    navigationButtons.forEach(element => {
+        element.addEventListener('click', function(e) {
             e.preventDefault();
             
             const targetSection = this.getAttribute('data-section');
             showSection(targetSection);
             
-            // Update active nav link
-            navLinks.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
+            // Update active nav link (only for nav-link elements)
+            if (this.classList.contains('nav-link')) {
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            } else {
+                // For buttons, update the corresponding nav link
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                const correspondingNavLink = document.querySelector(`.nav-link[data-section="${targetSection}"]`);
+                if (correspondingNavLink) {
+                    correspondingNavLink.classList.add('active');
+                }
+            }
             
             // Close mobile menu if open
             closeMobileMenu();
@@ -106,12 +116,11 @@ function initPublicationFilters() {
             // Update active filter button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
-            
-            // Filter publications
+              // Filter publications
             publications.forEach(pub => {
-                const categories = pub.getAttribute('data-category').split(' ');
+                const publicationType = pub.getAttribute('data-type');
                 
-                if (filterValue === 'all' || categories.includes(filterValue)) {
+                if (filterValue === 'all' || publicationType === filterValue) {
                     pub.style.display = 'block';
                     pub.style.opacity = '0';
                     pub.style.transform = 'scale(0.8)';
