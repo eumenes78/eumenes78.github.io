@@ -1,8 +1,103 @@
 <html>
     <head>
-    <script src="mySketch.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/p5@1.11.7/lib/p5.js" type="text/javascript"></script>
+        <title>Animated Pelican Visualization | Francisco Lopez-Martin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Interactive animated pelican on a bicycle with jumping mechanics and butterfly cursor">
+        
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: #0a0a0a;
+                overflow: hidden;
+                font-family: 'Rajdhani', sans-serif;
+            }
+            
+            /* Go Back Button Styles */
+            .back-button {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1000;
+                background: linear-gradient(45deg, #00ffff, #ff00ff);
+                border: none;
+                border-radius: 50px;
+                padding: 12px 24px;
+                color: #000;
+                font-family: 'Orbitron', monospace;
+                font-weight: 700;
+                font-size: 14px;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 
+                    0 0 20px rgba(0, 255, 255, 0.5),
+                    0 0 40px rgba(255, 0, 255, 0.3);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            
+            .back-button:hover {
+                transform: scale(1.05);
+                box-shadow: 
+                    0 0 30px rgba(0, 255, 255, 0.8),
+                    0 0 60px rgba(255, 0, 255, 0.5);
+                background: linear-gradient(45deg, #ff00ff, #00ffff);
+            }
+            
+            .back-button:active {
+                transform: scale(0.95);
+            }
+            
+            /* Instructions overlay */
+            .instructions {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                color: #00ffff;
+                padding: 15px;
+                border-radius: 10px;
+                font-family: 'Rajdhani', sans-serif;
+                font-size: 14px;
+                border: 1px solid #00ffff;
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+                z-index: 1000;
+            }
+            
+            .instructions h4 {
+                margin: 0 0 10px 0;
+                color: #ff00ff;
+                font-family: 'Orbitron', monospace;
+            }
+            
+            .instructions p {
+                margin: 5px 0;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.11.7/lib/p5.js" type="text/javascript"></script>
+        <script src="mySketch.js" type="text/javascript"></script>
     </head>
-<body>
-</body>
-
+    <body>
+        <!-- Go Back Button -->
+        <a href="../index.html#projects" class="back-button">
+            <span>←</span>
+            <span>Back to Portfolio</span>
+        </a>
+        
+        <!-- Instructions -->
+        <div class="instructions">
+            <h4>Controls</h4>
+            <p><strong>SPACE:</strong> Jump (Double jump available!)</p>
+            <p><strong>← →:</strong> Change direction</p>
+            <p><strong>Mouse:</strong> Butterfly cursor follows</p>
+        </div>
+    </body>
 </html>

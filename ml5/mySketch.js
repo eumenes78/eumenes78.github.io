@@ -211,4 +211,9 @@ function keyPressed() {
   } else if (keyCode === RIGHT_ARROW) {
     direction = 1;  // Move right
   }
+  
+  // Go back to portfolio with Escape key
+  if (keyCode === ESCAPE) {
+    window.location.href = '../index.html#projects';
+  }
 }
